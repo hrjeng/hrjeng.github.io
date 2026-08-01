@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鄭浩然_磐石高級中學資料處理科</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        /* 頁籤容器 */
+        .tab-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        /* 上方標籤欄位 */
+        .tab-header {
+            display: flex;
+            background-color: #f1f3f5;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        /* 單一標籤按鈕 */
+        .tab-btn {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            background: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #6c757d;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+            /* 滑鼠懸停效果 */
+            .tab-btn:hover {
+                color: #212529;
+                background-color: #e9ecef;
+            }
+
+            /* 當前選中的標籤 */
+            .tab-btn.active {
+                color: #0d6efd;
+                background-color: #ffffff;
+            }
+
+                /* 選中時的底部底線 */
+                .tab-btn.active::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -2px;
+                    left: 0;
+                    width: 100%;
+                    height: 3px;
+                    background-color: #0d6efd;
+                }
+
+        /* 頁籤內容區域 */
+        .tab-content-wrapper {
+            padding: 24px;
+        }
+
+        .tab-panel {
+            display: none; /* 預設隱藏所有面板 */
+            line-height: 1.6;
+            color: #333333;
+        }
+
+            /* 顯示當前選中的面板 */
+            .tab-panel.active {
+                display: block;
+                animation: fadeIn 0.3s ease;
+            }
+
+        /* 淡入動畫 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* 預設隱藏所有內容區塊 */
+        .content-box {
+            display: none;
+            padding: 15px;
+            margin-top: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: #f9f9f9;
+        }
+
+        select {
+            /* 1. 設定高度 */
+            height: 30px;
+            /* 2. 內邊距：調整文字與邊框的距離 */
+            padding: 0 12px;
+            /* 3. 字體與字號 */
+            font-size: 16px; /* 提示：iOS 上小於 16px 點擊時會自動放大頁面 */
+            /* 4. 確保高度計算包含 padding 與 border */
+            box-sizing: border-box;
+            /* 5. 圓角與邊框 */
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        /* 預設顯示第一個區塊 */
+        #content1 {
+            display: block;
+        }
+
+        #content6 {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tab-container">
+        <!-- 上方選單 -->
+        <div class="tab-header" role="tablist">
+            <button class="tab-btn active" role="tab" aria-selected="true" data-tab="tab-1">個人簡歷</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab-2">授課科目</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab-3">教學規劃</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab-4">班級經營</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab-4">技藝競賽</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab-4">數位素養</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab-4">＠因材網</button>
+        </div>
+
+        <!-- 下方對應內容面板 -->
+        <div class="tab-content-wrapper">
+            <div id="tab-1" class="tab-panel active" role="tabpanel">
+                <h2>個人資料</h2>
+                <table style="line-height:25px;">
+                    <tbody>
+                        <tr>
+                            <td class="left-main" rowspan="5" style="text-align:center; vertical-align:top;" width="25%">
+                                <p>
+                                    <img alt="" src="https://www.sphs.hc.edu.tw/ischool/rfile/1f444af530411d848acb3c23913347b1" style="width: 200px; height: 200px;" />
+                                </p>
+                            </td>
+                            <td style="text-align: center;" width="15%">
+                                <p style="text-align: left;">
+                                    <span style="font-family:微軟正黑體;"><span style="font-size:16px;">&nbsp;姓名</span></span>
+                                </p>
+                            </td>
+                            <td width="55%">
+                                <span style="font-family:微軟正黑體;"><span style="font-size:16px;">鄭浩然&nbsp; HAO JAN CHENG</span></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <p style="text-align: left;">
+                                    <span style="font-family:微軟正黑體;"><span style="font-size:16px;">&nbsp;電子郵件</span></span>
+                                </p>
+                            </td>
+                            <td>
+                                <span style="font-family:微軟正黑體;"><span style="font-size:16px;">hrjeng@sphs.hc.edu.tw</span></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;">
+                                <p style="text-align: left;">
+                                    <span style="font-family:微軟正黑體;"><span style="font-size:16px;">&nbsp;電話 / 辦公室</span></span>
+                                </p>
+                            </td>
+                            <td style="text-align: center;">
+                                <p style="text-align: left;">
+                                    <span style="font-family:微軟正黑體;"><span style="font-size:16px;">03-5223946 分機 265</span></span>
+                                </p>
+                                <p style="text-align: left;">
+                                    <span style="font-family:微軟正黑體;"><span style="font-size:16px;">百德樓二樓資料處理科</span></span>
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr />
+                <h3>
+                    <br />
+                    請選擇
+                    <!-- 下拉選單 -->
+                    <select id="contentSelect1" onchange="switchContent1()">
+                        <option value="content1">學歷</option>
+                        <option value="content2">經歷</option>
+                        <option value="content3">技術證照</option>
+                        <option value="content4">技術服務</option>
+                        <option value="content5">獲獎紀錄</option>
+
+                    </select>
+                </h3>
+                <!-- 內容區塊 -->
+                <div id="content1" class="content-box">
+                    <h3>學歷</h3>
+                    <p>國立清華大學工程與系統科學系學士</p>
+                    <p>國立清華大學工程與系統科學系博士</p>
+                </div>
+
+                <div id="content2" class="content-box">
+                    <h3>經歷</h3>
+                    <p>亞太創意技術學院資訊管理系/數位媒體設計系</p>
+                    <p>--技專校院，教學、研究、行政、輔導等面向職務</p>
+                    <p>國立臺灣師範大學工業教育學系</p>
+                    <p>--綜合暨技術型高級中等學校實作評量、實習課程實作能力評量指引</p>
+                    <p>財團法人大學入學考試中心基金會</p>
+                    <p>--全電腦化大型同步線上考試資訊系統開發</p>
+                    <p>國立臺灣師範大學科學教育中心</p>
+                    <p>--全電腦化大型同步線上考試資訊系統開發</p>
+                    <p>新竹市天主教磐石高級中學</p>
+                    <p>--資料處理科教師</p>
+                </div>
+
+                <div id="content3" class="content-box">
+                    <h3>技術證照</h3>
+                    <p>1. Microsoft Specialist：Programming in HTML5 with JavaScript and CSS3</p>
+                    <p>2. Microsoft Certified Professional</p>
+                    <p>3. Autodesk 3ds Max Design 2010 Certified Professional</p>
+                    <p>4. Autodesk AutoCAD 2010 Certified Professional</p>
+                    <p>5. MAGIX Music Maker 16 Intermediate Level curriculum of study</p>
+                    <p>6. ITE經濟部資訊專業人員-數位內容遊戲美術</p>
+                    <p>7. ITE經濟部資訊專業人員-數位內容遊戲企劃</p>
+                    <p>8. ITE經濟部資訊專業人員-資訊管理應用</p>
+                    <p>9. ITE經濟部資訊專業人員-LINUX維運管理</p>
+                    <p>10. TQC-Project 2007進階級</p>
+                    <p>11. EEC企業電子化規劃師、助理規劃師</p>
+                    <p>12. EEC電子商務專業級、辦公軟體應用類專業級</p>
+                    <p>13. CERTIPORT-IC3 Authorized Proctor</p>
+                    <p>14. CERTIPORT-IC3 Internet and Computing Core Certification</p>
+                </div>
+                <div id="content4" class="content-box">
+                    <h3>技術服務</h3>
+                    <p>內政部入出國及移民署約聘、約僱資訊人員甄選命題委員2009</p>
+                    <p>桃竹苗區技術校院四年制進修部暨專科學校二年制夜間部申請入學聯合招生委員會闈長2009</p>
+                    <p>桃竹苗區技術校院四年制進修部暨專科學校二年制夜間部申請入學聯合招生委員會闈長2008</p>
+                    <p>桃竹苗區技術校院四年制進修部暨專科學校二年制夜間部申請入學聯合招生委員會命題委員2007</p>
+                    <p>桃竹苗區技術校院四年制進修部暨專科學校二年制夜間部申請入學聯合招生委員會命題委員2006</p>
+                </div>
+                <div id="content5" class="content-box">
+                    <h3>獲獎紀錄</h3>
+                    <p>行政院教育人員服務成績優良服務獎章</p>
+                    <p>中區技專校院教學資源中心優良課程獎</p>
+
+                </div>
+            </div>
+
+            <div id="tab-2" class="tab-panel" role="tabpanel">
+                <h2>授課科目</h2>
+                <h3>
+                    <br />
+                    請選擇
+                    <!-- 下拉選單 -->
+                    <select id="contentSelect2" onchange="switchContent2()">
+                        <option value="content6">115學年度第1學期程式語言與設計</option>
+                        <option value="content7">115學年度第1學期資料庫應用</option>
+                        <option value="content8">114學年度第2學期程式語言與設計</option>
+                    </select>
+                </h3>
+                <!-- 內容區塊 -->
+                <div id="content6" class="content-box">
+                    <h3>115學年度第1學期_程式語言與設計_教學規畫</h3>
+                    <p>
+                        <span style="font-size:16px;">--認識程式語言、程式設計演算法</span>
+                    </p>
+                    <p>
+                        <iframe allowfullscreen="allowfullscreen" frameborder="0" height="389" mozallowfullscreen="true" src="https://docs.google.com/presentation/d/e/2PACX-1vT7y-5kCt7I82VFytwIo_sors17bx4KPuZCUG3JDE4njeiW6BqfbmLDGeaZidegMumJLoxAOM5WbOVZ/pubembed?start=false&amp;loop=false&amp;delayms=3000" webkitallowfullscreen="true" width="700"></iframe>
+                    </p>
+                    <p>
+                        <span style="font-size: 16px;">--開發環境、物件導向程式設計重要概念</span>
+                    </p>
+                    <p>
+                        <iframe allowfullscreen="allowfullscreen" frameborder="0" height="389" mozallowfullscreen="true" src="https://docs.google.com/presentation/d/e/2PACX-1vRkvj8dleQA93PYHfp-09sdjpZ-I6D8PcAb16zIEm1uvA0Lc3ULdytKGn_n6jj-hjlJogQlNPoao4Da/pubembed?start=false&amp;loop=false&amp;delayms=3000" webkitallowfullscreen="true" width="700"></iframe>
+                    </p>
+                    <p>
+                        <span style="font-size: 16px;">--程式基礎架構、程式語法規則</span><span style="font-size:16px;">、<span style="font-family: 微軟正黑體, sans-serif;">輸入與輸出</span></span>
+                    </p>
+                    <p>
+                        <iframe allowfullscreen="allowfullscreen" frameborder="0" height="389" mozallowfullscreen="true" src="https://docs.google.com/presentation/d/e/2PACX-1vQR176WHr-gVcbkTkKxIZ_tv1nI20PjY0UWDC7q032G2gpVkXblQiKLPYaTAt0J60Vv6u1O1B7Fv-PR/pubembed?start=false&amp;loop=false&amp;delayms=3000" webkitallowfullscreen="true" width="700"></iframe>
+                    </p>
+                    <p>
+                        <span style="font-size: 16px;">--</span><span style="font-size: 16px;"><span style="font-family: 微軟正黑體, sans-serif;">變數、資料型別</span></span>
+                    </p>
+                    <p>
+                        <iframe allowfullscreen="allowfullscreen" frameborder="0" height="389" mozallowfullscreen="true" src="https://docs.google.com/presentation/d/e/2PACX-1vTWSeKakZNR_9ufdxpx1VL2D-ol-wfWFhD0DUbar2rmHzQkCl8PYrZfw7IyDR4UGKKOLfCadY9BKFJb/pubembed?start=false&amp;loop=false&amp;delayms=3000" webkitallowfullscreen="true" width="700"></iframe>
+                    </p>
+                    <p>
+                        <span style="font-size: 16px;">--運算子、字串</span>
+                    </p>
+                    <p>
+                        <iframe allowfullscreen="allowfullscreen" frameborder="0" height="389" mozallowfullscreen="true" src="https://docs.google.com/presentation/d/e/2PACX-1vRppcTy0-oO0iD9UuEoChzRX_aoakdo3sOPAy1ILcJSJtRj_iS6s3Q_dK1xMw0FvyOJi1nCMo7sWPx4/pubembed?start=false&amp;loop=false&amp;delayms=3000" webkitallowfullscreen="true" width="700"></iframe>
+                    </p>
+                    <p>
+                        <span style="font-size: 16px;">--結構化程式設計概念、雙向選擇結構、多向選擇結構、巢狀選擇結構</span>
+                    </p>
+                    <p>
+                        <iframe allowfullscreen="allowfullscreen" frameborder="0" height="389" mozallowfullscreen="true" src="https://docs.google.com/presentation/d/e/2PACX-1vSPxK7y_4a7HmBkAQ1uuxzNu43Q7phy4Cr1Bjf3rVE4k-pzDUkXizzr9vv8AoMAAkDyqBtOnhzOD6tA/pubembed?start=false&amp;loop=false&amp;delayms=3000" webkitallowfullscreen="true" width="700"></iframe>
+                    </p>
+                    <p>
+                        <span style="font-size: 16px;">--迴圈基本架構與概念、計數迴圈結構、條件迴圈結構</span>
+                    </p>
+                    <p>
+                        <iframe allowfullscreen="allowfullscreen" frameborder="0" height="389" mozallowfullscreen="true" src="https://docs.google.com/presentation/d/e/2PACX-1vRbikohv7o34AGgftdWOUK2rQ6_jB_8hcsq1dlOJLG2_C_UPuLnjjSCO4j7dQmD-AxTvj3O48XfXWwY/pubembed?start=false&amp;loop=false&amp;delayms=3000" webkitallowfullscreen="true" width="700"></iframe>
+                    </p>
+                </div>
+
+                <div id="content7" class="content-box">
+                    <h3>115學年度第1學期_資料庫應用_教學規畫</h3>
+                    <p>
+                        <span style="font-size:16px;">--資料庫導論</span>
+                    </p>
+                    <p>
+                        <iframe allowfullscreen="allowfullscreen" frameborder="0" height="389" mozallowfullscreen="true" src="https://docs.google.com/presentation/d/e/2PACX-1vT0QboA7SujewkjwiRFfKwa4dcK5sh-gdIOKF6EOfdWsIarUDO-5dgnDrjG9RgBoN6eHkQzGPU05AIc/pubembed?start=false&amp;loop=false&amp;delayms=3000" webkitallowfullscreen="true" width="700"></iframe>
+                    </p>
+                    <p>
+                        <span style="font-size:16px;">--ACCESS介紹與基本操作</span>
+                    </p>
+                    <p>
+                        <iframe allowfullscreen="allowfullscreen" frameborder="0" height="389" mozallowfullscreen="true" src="https://docs.google.com/presentation/d/e/2PACX-1vSWdzCqUDftf8jqbleR9eHLXRgxNVDNctXLTQWjVguFtLR7s9rgaTgJwKlf7Ep3nSEBx0b3ctHNdT_g/pubembed?start=false&amp;loop=false&amp;delayms=3000" webkitallowfullscreen="true" width="700"></iframe>
+                    </p>
+                    <p>
+                        <span style="font-size:16px;">--建立與管理資料庫</span>
+                    </p>
+                    <p>
+                        <iframe allowfullscreen="allowfullscreen" frameborder="0" height="389" mozallowfullscreen="true" src="https://docs.google.com/presentation/d/e/2PACX-1vQwc4Pl4fTD2iIhvO9ZQoxjPT0eVC25iceXXz-K_0JgwREaI5lcgTduBi2g2ytuETGSK77_2SB5l564/pubembed?start=false&amp;loop=false&amp;delayms=3000" webkitallowfullscreen="true" width="700"></iframe>
+                    </p>
+                    <p>
+                        <span style="font-size:16px;">--建立資料表</span>
+                    </p>
+                    <p>
+                        <span style="font-size:16px;">--資料表操作</span>
+                    </p>
+                    <p>
+                        <span style="font-size:16px;">--資料表關聯</span>
+                    </p>
+                    <p>
+                        <span style="font-size:16px;">--建立與管理查詢</span>
+                    </p>
+                    <p>
+                        <span style="font-size:16px;">--進階查詢應用與動作查詢</span>
+                    </p>
+                    <p>
+                        <span style="font-size:16px;">--建立與管理表單</span>
+                    </p>
+                    <p>
+                        <span style="font-size:16px;">--報表應用</span>
+                    </p>
+
+                </div>
+                <div id="content8" class="content-box">
+                    <h3>114學年度第2學期_程式語言與設計_教學規畫</h3>
+                    <p>
+                        <span style="font-size:16px;">--巢狀迴圈結構、變更回圈執行流程break、continue、else</span>
+                    </p>
+                    <p>
+                        <iframe allowfullscreen="allowfullscreen" frameborder="0" height="389" mozallowfullscreen="true" src="https://docs.google.com/presentation/d/e/2PACX-1vTCCcUpT7J0xOOGLqnExv4dyL-PVAdmWPAL_9k4VX5ucK29QYOwLpLrR3khaZAse-O2JU0gnVKYAzAr/pubembed?start=false&amp;loop=true&amp;delayms=3000" webkitallowfullscreen="true" width="700"></iframe>
+                    </p>
+                    <p>
+                        <span style="font-size: 16px;">--陣列概念，一維陣列、二維陣列</span>
+                    </p>
+                    <p>
+                        <iframe allowfullscreen="allowfullscreen" frameborder="0" height="389" mozallowfullscreen="true" src="https://docs.google.com/presentation/d/e/2PACX-1vRWvRDARpxd9FddOAzO4LDuiG54BPG6_pMgs82OHhn7BnY8tcOL8oiVlEAYIrLLEzQAffzZNbtrfjMz/pubembed?start=false&amp;loop=false&amp;delayms=3000" webkitallowfullscreen="true" width="700"></iframe>
+                    </p>
+                    <p>
+                        <span style="font-size: 16px;">--函式定義與呼叫、變數作用範圍</span>
+                    </p>
+                    <p>
+                        <iframe allowfullscreen="allowfullscreen" frameborder="0" height="389" mozallowfullscreen="true" src="https://docs.google.com/presentation/d/e/2PACX-1vRrWtwA_xgfedadEt8jVdiXEzfMAvfgf8J8fsFp5lUESde9h9zix8jVD9p1vdlJ3c-XVC0ID8864Obi/pubembed?start=false&amp;loop=false&amp;delayms=3000" webkitallowfullscreen="true" width="700"></iframe>
+                    </p>
+                    <p>
+                        <span style="font-size: 16px;">--內建函式與標準函式庫</span>
+                    </p>
+                    <p>
+                        <iframe allowfullscreen="allowfullscreen" frameborder="0" height="389" mozallowfullscreen="true" src="https://docs.google.com/presentation/d/e/2PACX-1vT-I2KCGUSijMiXmdTDIfwnTEhA3TrTLf6AuI_kwbs8exTo2HAG6SdFB4zgch1GcGsbBUkDHwimnc-6/pubembed?start=false&amp;loop=false&amp;delayms=3000" webkitallowfullscreen="true" width="700"></iframe>
+                    </p>
+                    <p>
+                        <span style="font-size: 16px;">--遞迴概念、遞迴函式結構</span>
+                    </p>
+                    <p>
+                        <iframe allowfullscreen="allowfullscreen" frameborder="0" height="389" mozallowfullscreen="true" src="https://docs.google.com/presentation/d/e/2PACX-1vQNCFO0-jKGxCvqxWfoG8ZMsDVmVehb2si4vfpr51xGDUYP2pZvgZ6FKQT9idx9K8afCjHhTHRoELDd/pubembed?start=false&amp;loop=false&amp;delayms=3000" webkitallowfullscreen="true" width="700"></iframe>
+                    </p>
+                    <p>
+                        <span style="font-size: 16px;">--資料容器，Tuple、list、dict、set</span>
+                    </p>
+                    <p>
+                        <iframe allowfullscreen="allowfullscreen" frameborder="0" height="389" mozallowfullscreen="true" src="https://docs.google.com/presentation/d/e/2PACX-1vQ2RMauK6kMC8pKgZLGgFFbPR_q4UsWpTvMyR6TiTrll880oeQrVlN5dW7a5IkMYK64nsD2-Nxsa0t-/pubembed?start=false&amp;loop=false&amp;delayms=3000" webkitallowfullscreen="true" width="700"></iframe>
+                    </p>
+                    <p>
+                        <span style="font-size: 16px;">--模組與套件</span>
+                    </p>
+                    <p>
+                        <iframe allowfullscreen="allowfullscreen" frameborder="0" height="389" mozallowfullscreen="true" src="https://docs.google.com/presentation/d/e/2PACX-1vSbeZhq5zisA5RkUu8lh43Z8FbM50Z-L6MzQzXDElL0GkTX1Ao4XegnoxU_gflU_Zn1nn8NytlUBytF/pubembed?start=false&amp;loop=false&amp;delayms=3000" webkitallowfullscreen="true" width="700"></iframe>
+                    </p>
+                </div>
+                <div id="tab-3" class="tab-panel" role="tabpanel">
+                    <h2>通知喜好</h2>
+                    <p>選擇您希望接收通知的方式，包含電子郵件、簡訊或推播通知。</p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const buttons = document.querySelectorAll('.tab-btn');
+                const panels = document.querySelectorAll('.tab-panel');
+
+                buttons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const targetTabId = button.getAttribute('data-tab');
+
+                        // 移除所有按鈕的 active 狀態
+                        buttons.forEach(btn => {
+                            btn.classList.remove('active');
+                            btn.setAttribute('aria-selected', 'false');
+                        });
+
+                        // 隱藏所有內容面板
+                        panels.forEach(panel => panel.classList.remove('active'));
+
+                        // 啟用當前點擊的按鈕與面板
+                        button.classList.add('active');
+                        button.setAttribute('aria-selected', 'true');
+                        document.getElementById(targetTabId).classList.add('active');
+                    });
+                });
+            });
+            function switchContent1() {
+                // 取得下拉選單選取的值
+                var selectedValue = document.getElementById("contentSelect1").value;
+
+                // 取得所有內容區塊
+                var contents = document.getElementsByClassName("content-box");
+
+                // 先將所有區塊隱藏
+                for (var i = 0; i < contents.length; i++) {
+                    contents[i].style.display = "none";
+                }
+
+                // 顯示被選取的區塊
+                document.getElementById(selectedValue).style.display = "block";
+            }
+            function switchContent2() {
+                // 取得下拉選單選取的值
+                var selectedValue = document.getElementById("contentSelect2").value;
+
+                // 取得所有內容區塊
+                var contents = document.getElementsByClassName("content-box");
+
+                // 先將所有區塊隱藏
+                for (var i = 0; i < contents.length; i++) {
+                    contents[i].style.display = "none";
+                }
+
+                // 顯示被選取的區塊
+                document.getElementById(selectedValue).style.display = "block";
+            }
+
+        </script>
+    </div>
+</body>
+</html>
