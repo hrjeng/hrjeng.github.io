@@ -27,6 +27,91 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             overflow: hidden;
         }
+        /* ==================== 1. 新增：自動播放圖片輪播樣式 ==================== */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 200px; /* 可依需求調整高度 */
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            z-index: 1;
+        }
+
+            .carousel-slide.active {
+                opacity: 1;
+                z-index: 2;
+            }
+
+            .carousel-slide img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* 自動裁切圖片以填滿區域 */
+            }
+
+        /* 左右切換按鈕 */
+        .carousel-prev, .carousel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.4);
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 10;
+            transition: background 0.3s;
+        }
+
+            .carousel-prev:hover, .carousel-next:hover {
+                background: rgba(0, 0, 0, 0.8);
+            }
+
+        .carousel-prev {
+            left: 15px;
+        }
+
+        .carousel-next {
+            right: 15px;
+        }
+
+        /* 下方指示燈 (Dots) */
+        .carousel-dots {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+            .dot.active {
+                background: #ffffff;
+                width: 24px;
+                border-radius: 5px; /* 當前選中的長條狀效果 */
+            }
+        /* ====================================================================== */
 
         /* 上方標籤欄位 */
         .tab-header {
@@ -133,6 +218,31 @@
 <body>
 
     <div class="tab-container">
+        <!--【新增】Tab 上方的自動播放圖片輪播區塊 -->
+        <div class="carousel-container" id="autoCarousel">
+            <!-- 輪播圖片群（請自行替換 src 圖片網址） -->
+            <div class="carousel-slide active">
+                <img src="https://picsum.photos/800/300?random=1" alt="橫幅圖片1">
+            </div>
+            <div class="carousel-slide">
+                <img src="https://picsum.photos/800/300?random=2" alt="橫幅圖片2">
+            </div>
+            <div class="carousel-slide">
+                <img src="https://picsum.photos/800/300?random=3" alt="橫幅圖片3">
+            </div>
+
+            <!-- 切換按鈕 -->
+            <button class="carousel-prev" onclick="prevSlide()">&#10094;</button>
+            <button class="carousel-next" onclick="nextSlide()">&#10095;</button>
+
+            <!-- 指示點 (Dots) -->
+            <div class="carousel-dots">
+                <span class="dot active" onclick="goToSlide(0)"></span>
+                <span class="dot" onclick="goToSlide(1)"></span>
+                <span class="dot" onclick="goToSlide(2)"></span>
+            </div>
+        </div>
+
         <!-- 上方選單 -->
         <div class="tab-header" role="tablist">
             <button class="tab-btn active" role="tab" aria-selected="true" data-tab="tab-1">個人簡歷</button>
@@ -678,6 +788,59 @@
         </div>
 
         <script>
+            // ==================== 2. 新增：自動播放輪播圖 JS 功能 ====================
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.dot');
+            const slideCount = slides.length;
+            let slideInterval;
+
+            function showSlide(index) {
+                if (index >= slideCount) currentSlide = 0;
+                else if (index < 0) currentSlide = slideCount - 1;
+                else currentSlide = index;
+
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === currentSlide);
+                });
+
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentSlide);
+                });
+            }
+
+            function nextSlide() {
+                showSlide(currentSlide + 1);
+            }
+
+            function prevSlide() {
+                showSlide(currentSlide - 1);
+            }
+
+            function goToSlide(index) {
+                showSlide(index);
+                resetInterval();
+            }
+
+            function startInterval() {
+                // 每 4000 毫秒（4秒）自動切換下一張
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+
+            function resetInterval() {
+                clearInterval(slideInterval);
+                startInterval();
+            }
+
+            // 當滑鼠移入輪播圖時暫停自動播放，移出時繼續
+            const carouselElem = document.getElementById('autoCarousel');
+            carouselElem.addEventListener('mouseenter', () => clearInterval(slideInterval));
+            carouselElem.addEventListener('mouseleave', startInterval);
+
+            // 初始化啟動自動輪播
+            startInterval();
+            // =========================================================================
+
             document.addEventListener('DOMContentLoaded', () => {
                 const buttons = document.querySelectorAll('.tab-btn');
                 const panels = document.querySelectorAll('.tab-panel');
