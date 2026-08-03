@@ -211,7 +211,7 @@
         border-radius: 6px;
         }
         /* 預設顯示的內容區塊 */
-        #content1, #content6, #content15, #content24 {
+        #content1, #content6, #content15, #content24, #content27 {
         display: block;
         }
       </style>
@@ -972,12 +972,8 @@
             <h3>
               四技二專入學招生管道
             </h3>
-            <p>
-              <strong>
-                <span style="font-size:16px;">四技二專入學招生管道</span>
-              </strong>
-            </p>
-            <hr />
+            <br/>
+            <hr/>
             <p>
               <a href="https://www.jctv.ntut.edu.tw/enter42/" target="_blank">
                 <span style="font-size:16px;">四技二專聯合甄選</span>
@@ -1087,9 +1083,46 @@
           </div>
         </div>  
         <div id="tab-5" class="tab-panel" role="tabpanel">
-          <h2>技藝競賽</h2>
+            <h2>技藝競賽</h2>
+            <h3>
+                請選擇
+                <!-- 下拉選單 -->
+                <select id="contentSelect5" onchange="switchContent5()">
+                    <option value="content27">全國高級中等學校技藝競賽資訊平台</option>
+                    <option value="content28">DOMjudge術科模擬練習線上平台</option>
+                    <option value="content29">自編學科模擬練習試題一</option>
+                    <option value="content30">自編學科模擬練習試題二</option>
+                    <option value="content31">自編學科模擬練習試題三</option>
+                    <option value="content32">自編學科模擬練習試題四</option>
+                    <option value="content33">自編學科模擬練習試題五</option>
+                    <option value="content34">自編學科模擬練習試題六</option>
+                </select>
+            </h3>
+            <div id="content27" class="content-box">
+                <h3>
+                    全國高級中等學校技藝競賽資訊平台
+                </h3>
+                <p>
+                    <span style="font-size:16px;">全國高級中等學校技藝競賽資訊平台_<a href="https://sci-me.k12ea.gov.tw/Contest/HistoryQuestionsList?c_class=2" target="_blank">商業類歷屆考題</a></span>
+                </p>
+                <p>
+                    <img alt="" src="k12contest.png" width="650" />
+                </p>
+            </div>
+            <div id="content28" class="content-box">
+                <h3>
+                    DOMjudge術科模擬練習線上平台
+                </h3>
+                <br />
+                <hr />
+                <p>
+                    <a href="https://zerojudge.ntub.tw/public" target="_blank">DOMjudge術科評分系統練習線上平台</a>
+                </p>
+                <p>
+                    <img alt="" src="88e35116466e081de0873f6c878a235b.png" width="650" />
+                </p>
 
-        </div>
+            </div>
         <div id="tab-6" class="tab-panel" role="tabpanel">
           <h2>數位素養</h2>
 
@@ -1208,6 +1241,13 @@
                 contents.forEach(box => box.style.display = "none");
                 document.getElementById(selectedValue).style.display = "block";
             }
+          function switchContent5() {
+              var selectedValue = document.getElementById("contentSelect5").value;
+              // 僅搜尋 tab-4 內部的 content-box
+              var contents = document.querySelectorAll("#tab-5 .content-box");
+              contents.forEach(box => box.style.display = "none");
+              document.getElementById(selectedValue).style.display = "block";
+          }
 
       </script>
     </div>
