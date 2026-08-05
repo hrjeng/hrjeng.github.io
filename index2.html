@@ -19,7 +19,6 @@
             padding: 20px;
         }
 
-        /* 頁籤容器 */
         .tab-container {
             max-width: 800px;
             margin: 0 auto;
@@ -28,11 +27,12 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             overflow: hidden;
         }
-        /* ==================== 1. 新增：自動播放圖片輪播樣式 ==================== */
+
+        /* 輪播樣式 */
         .carousel-container {
             position: relative;
             width: 100%;
-            height: 200px; /* 可依需求調整高度 */
+            height: 200px;
             overflow: hidden;
             background-color: #000;
         }
@@ -56,10 +56,9 @@
             .carousel-slide img {
                 width: 100%;
                 height: 100%;
-                object-fit: cover; /* 自動裁切圖片以填滿區域 */
+                object-fit: cover;
             }
 
-        /* 左右切換按鈕 */
         .carousel-prev, .carousel-next {
             position: absolute;
             top: 50%;
@@ -87,7 +86,6 @@
             right: 15px;
         }
 
-        /* 下方指示燈 (Dots) */
         .carousel-dots {
             position: absolute;
             bottom: 12px;
@@ -110,18 +108,16 @@
             .dot.active {
                 background: #ffffff;
                 width: 24px;
-                border-radius: 5px; /* 當前選中的長條狀效果 */
+                border-radius: 5px;
             }
-        /* ====================================================================== */
 
-        /* 上方標籤欄位 */
+        /* 頁籤樣式 */
         .tab-header {
             display: flex;
             background-color: #f1f3f5;
             border-bottom: 2px solid #e9ecef;
         }
 
-        /* 單一標籤按鈕 */
         .tab-btn {
             flex: 1;
             padding: 14px 20px;
@@ -135,19 +131,16 @@
             position: relative;
         }
 
-            /* 滑鼠懸停效果 */
             .tab-btn:hover {
                 color: #212529;
                 background-color: #e9ecef;
             }
 
-            /* 當前選中的標籤 */
             .tab-btn.active {
                 color: #0d6efd;
                 background-color: #ffffff;
             }
 
-                /* 選中時的底部底線 */
                 .tab-btn.active::after {
                     content: '';
                     position: absolute;
@@ -158,24 +151,16 @@
                     background-color: #0d6efd;
                 }
 
-        /* 頁籤內容區域 */
         .tab-content-wrapper {
             padding: 24px;
         }
 
         .tab-panel {
-            display: none; /* 預設隱藏所有面板 */
             line-height: 1.6;
             color: #333333;
+            animation: fadeIn 0.3s ease;
         }
 
-            /* 顯示當前選中的面板 */
-            .tab-panel.active {
-                display: block;
-                animation: fadeIn 0.3s ease;
-            }
-
-        /* 淡入動畫 */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -187,7 +172,7 @@
                 transform: translateY(0);
             }
         }
-        /* 預設隱藏所有內容區塊 */
+
         .content-box {
             display: none;
             padding: 15px;
@@ -198,229 +183,129 @@
         }
 
         select {
-            /* 1. 設定高度 */
             height: 30px;
-            /* 2. 內邊距：調整文字與邊框的距離 */
             padding: 0 12px;
-            /* 3. 字體與字號 */
-            font-size: 16px; /* 提示：iOS 上小於 16px 點擊時會自動放大頁面 */
-            /* 4. 確保高度計算包含 padding 與 border */
+            font-size: 16px;
             box-sizing: border-box;
-            /* 5. 圓角與邊框 */
             border: 1px solid #ccc;
             border-radius: 6px;
-        }
-        /* 預設顯示的內容區塊 */
-        #content1, #content6, #content15, #content24, #content27, #content35, #content43 {
-            display: block;
         }
     </style>
 </head>
 <body>
 
     <div class="tab-container">
+        <!-- 輪播區塊 -->
         <div class="carousel-container" id="autoCarousel">
-            <div class="carousel-slide active">
-                <img src="https://picsum.photos/800/300?random=1" alt="橫幅圖片1">
-            </div>
-            <div class="carousel-slide">
-                <img src="https://picsum.photos/800/300?random=2" alt="橫幅圖片2">
-            </div>
-            <div class="carousel-slide">
-                <img src="https://picsum.photos/800/300?random=3" alt="橫幅圖片3">
-            </div>
-            <div class="carousel-slide">
-                <img src="https://picsum.photos/800/300?random=4" alt="橫幅圖片4">
-            </div>
-            <div class="carousel-slide">
-                <img src="https://picsum.photos/800/300?random=5" alt="橫幅圖片5">
-            </div>
+            <div class="carousel-slide active"><img src="https://picsum.photos/800/300?random=1" alt="橫幅圖片1"></div>
+            <div class="carousel-slide"><img src="https://picsum.photos/800/300?random=2" alt="橫幅圖片2"></div>
+            <div class="carousel-slide"><img src="https://picsum.photos/800/300?random=3" alt="橫幅圖片3"></div>
+            <div class="carousel-slide"><img src="https://picsum.photos/800/300?random=4" alt="橫幅圖片4"></div>
+            <div class="carousel-slide"><img src="https://picsum.photos/800/300?random=5" alt="橫幅圖片5"></div>
 
-            <!-- 切換按鈕 -->
             <button class="carousel-prev" onclick="prevSlide()">&#10094;</button>
             <button class="carousel-next" onclick="nextSlide()">&#10095;</button>
 
-            <!-- 指示點 (Dots) -->
             <div class="carousel-dots">
                 <span class="dot active" onclick="goToSlide(0)"></span>
                 <span class="dot" onclick="goToSlide(1)"></span>
                 <span class="dot" onclick="goToSlide(2)"></span>
                 <span class="dot" onclick="goToSlide(3)"></span>
                 <span class="dot" onclick="goToSlide(4)"></span>
-
             </div>
         </div>
 
         <!-- 上方選單 -->
         <div class="tab-header" role="tablist">
-            <button class="tab-btn active" role="tab" aria-selected="true" data-src="tab1.html">個人簡歷</button>
-            <button class="tab-btn" role="tab" aria-selected="false" data-src="tab2.html">授課科目</button>
-            <button class="tab-btn" role="tab" aria-selected="false" data-src="tab3.html">班級經營</button>
-            <button class="tab-btn" role="tab" aria-selected="false" data-src="tab4.html">升學進路</button>
-            <button class="tab-btn" role="tab" aria-selected="false" data-src="tab5.html">技藝競賽</button>
-            <button class="tab-btn" role="tab" aria-selected="false" data-src="tab6.html">數位素養</button>
-            <button class="tab-btn" role="tab" aria-selected="false" data-src="tab7.html">＠因材網</button>
+            <button class="tab-btn active" role="tab" aria-selected="true" data-file="tab-1.html">個人簡歷</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-file="tab-2.html">授課科目</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-file="tab-3.html">班級經營</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-file="tab-4.html">升學進路</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-file="tab-5.html">技藝競賽</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-file="tab-6.html">數位素養</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-file="tab-7.html">＠因材網</button>
         </div>
 
-        <!-- 下方對應內容面板 -->
-        <div class="tab-content-wrapper">
+        <!-- 動態內容載入容器 -->
+        <div class="tab-content-wrapper" id="main-content">
+            <!-- 動態載入區域 -->
         </div>
-
-        <script>
-            // ======自動播放輪播圖 JS 功能 ====================
-            let currentSlide = 0;
-            const slides = document.querySelectorAll('.carousel-slide');
-            const dots = document.querySelectorAll('.dot');
-            const slideCount = slides.length;
-            let slideInterval;
-
-            function showSlide(index) {
-                if (index >= slideCount) currentSlide = 0;
-                else if (index < 0) currentSlide = slideCount - 1;
-                else currentSlide = index;
-
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === currentSlide);
-                });
-
-                dots.forEach((dot, i) => {
-                    dot.classList.toggle('active', i === currentSlide);
-                });
-            }
-
-            function nextSlide() {
-                showSlide(currentSlide + 1);
-            }
-
-            function prevSlide() {
-                showSlide(currentSlide - 1);
-            }
-
-            function goToSlide(index) {
-                showSlide(index);
-                resetInterval();
-            }
-
-            function startInterval() {
-                // 每 5000 毫秒（5秒）自動切換下一張
-                slideInterval = setInterval(nextSlide, 5000);
-            }
-
-            function resetInterval() {
-                clearInterval(slideInterval);
-                startInterval();
-            }
-
-            // 當滑鼠移入輪播圖時暫停自動播放，移出時繼續
-            const carouselElem = document.getElementById('autoCarousel');
-            carouselElem.addEventListener('mouseenter', () => clearInterval(slideInterval));
-            carouselElem.addEventListener('mouseleave', startInterval);
-
-            // 初始化啟動自動輪播
-            startInterval();
-            // =========================================================================
-
-            document.addEventListener('DOMContentLoaded', () => {
-                const buttons = document.querySelectorAll('.tab-btn');
-                const panels = document.querySelectorAll('.tab-panel');
-
-                buttons.forEach(button => {
-                    button.addEventListener('click', () => {
-                        const targetTabId = button.getAttribute('data-tab');
-
-                        // 移除所有按鈕的 active 狀態
-                        buttons.forEach(btn => {
-                            btn.classList.remove('active');
-                            btn.setAttribute('aria-selected', 'false');
-                        });
-
-                        // 隱藏所有內容面板
-                        panels.forEach(panel => panel.classList.remove('active'));
-
-                        // 啟用當前點擊的按鈕與面板
-                        button.classList.add('active');
-                        button.setAttribute('aria-selected', 'true');
-                        document.getElementById(targetTabId).classList.add('active');
-                    });
-                });
-            });
-
-            function switchContent1() {
-                var selectedValue = document.getElementById("contentSelect1").value;
-                // 僅搜尋 tab-1 內部的 content-box
-                var contents = document.querySelectorAll("#tab-1 .content-box");
-                contents.forEach(box => box.style.display = "none");
-                document.getElementById(selectedValue).style.display = "block";
-            }
-
-            function switchContent2() {
-                var selectedValue = document.getElementById("contentSelect2").value;
-                // 僅搜尋 tab-2 內部的 content-box
-                var contents = document.querySelectorAll("#tab-2 .content-box");
-                contents.forEach(box => box.style.display = "none");
-                document.getElementById(selectedValue).style.display = "block";
-            }
-            function switchContent3() {
-                var selectedValue = document.getElementById("contentSelect3").value;
-                // 僅搜尋 tab-3 內部的 content-box
-                var contents = document.querySelectorAll("#tab-3 .content-box");
-                contents.forEach(box => box.style.display = "none");
-                document.getElementById(selectedValue).style.display = "block";
-            }
-            function switchContent4() {
-                var selectedValue = document.getElementById("contentSelect4").value;
-                // 僅搜尋 tab-4 內部的 content-box
-                var contents = document.querySelectorAll("#tab-4 .content-box");
-                contents.forEach(box => box.style.display = "none");
-                document.getElementById(selectedValue).style.display = "block";
-            }
-            function switchContent5() {
-                var selectedValue = document.getElementById("contentSelect5").value;
-                // 僅搜尋 tab-4 內部的 content-box
-                var contents = document.querySelectorAll("#tab-5 .content-box");
-                contents.forEach(box => box.style.display = "none");
-                document.getElementById(selectedValue).style.display = "block";
-            }
-            function switchContent6() {
-                var selectedValue = document.getElementById("contentSelect6").value;
-                // 僅搜尋 tab-4 內部的 content-box
-                var contents = document.querySelectorAll("#tab-6 .content-box");
-                contents.forEach(box => box.style.display = "none");
-                document.getElementById(selectedValue).style.display = "block";
-            }
-            function switchContent7() {
-                var selectedValue = document.getElementById("contentSelect7").value;
-                // 僅搜尋 tab-4 內部的 content-box
-                var contents = document.querySelectorAll("#tab-7 .content-box");
-                contents.forEach(box => box.style.display = "none");
-                document.getElementById(selectedValue).style.display = "block";
-            }
-            async function loadTabContent(filePath) {
-                const contentBox = document.getElementById('content-box');
-                try {
-                    const response = await fetch(filePath);
-                    if (!response.ok) throw new Error('檔案讀取失敗');
-                    const html = await response.text();
-                    contentBox.innerHTML = html;
-                } catch (error) {
-                    contentBox.innerHTML = '<p>內容載入失敗！</p>';
-                }
-            }
-
-            // 為所有 Tab 按鈕綁定點擊事件
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.addEventListener('click', function () {
-                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-
-                    const file = this.getAttribute('data-src');
-                    loadTabContent(file);
-                });
-            });
-
-            // 預設載入第一個 Tab
-            loadTabContent('tab1.html');
-        </script>
     </div>
+
+    <script>
+        // 切換內容通用的下拉選單觸發邏輯
+        function switchContent(selectId) {
+            const select = document.getElementById(selectId);
+            if (!select) return;
+            const targetId = select.value;
+            const parent = select.closest('.tab-panel');
+            const boxes = parent.querySelectorAll('.content-box');
+
+            boxes.forEach(box => box.style.display = 'none');
+            const targetBox = document.getElementById(targetId);
+            if (targetBox) targetBox.style.display = 'block';
+        }
+
+        // 頁籤載入邏輯
+        async function loadTabContent(fileName) {
+            const wrapper = document.getElementById('main-content');
+            try {
+                const response = await fetch(fileName);
+                if (!response.ok) throw new Error('網絡響應不正常');
+                const html = await response.text();
+                wrapper.innerHTML = html;
+            } catch (error) {
+                wrapper.innerHTML = `<p>載入頁面失敗: ${error.message}</p>`;
+            }
+        }
+
+        // 初始化 Tab 切換事件
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.tab-btn').forEach(b => {
+                    b.classList.remove('active');
+                    b.setAttribute('aria-selected', 'false');
+                });
+                this.classList.add('active');
+                this.setAttribute('aria-selected', 'true');
+
+                const file = this.getAttribute('data-file');
+                loadTabContent(file);
+            });
+        });
+
+        // 預設載入第一個頁籤
+        loadTabContent('tab-1.html');
+
+        // 輪播控制邏輯
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.dot');
+        let slideInterval = setInterval(nextSlide, 5000);
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+                dots[i].classList.toggle('active', i === index);
+            });
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            let index = (currentSlide + 1) % slides.length;
+            showSlide(index);
+        }
+
+        function prevSlide() {
+            let index = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(index);
+        }
+
+        function goToSlide(index) {
+            showSlide(index);
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+    </script>
 </body>
 </html>
