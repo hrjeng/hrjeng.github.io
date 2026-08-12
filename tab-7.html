@@ -1,0 +1,61 @@
+<div class="tab-panel">
+    <h2>＠因材網</h2>
+
+    <div class="select-container">
+        <label for="contentSelect7"><strong>請選擇因材網學習主題：</strong></label>
+        <select id="contentSelect7" onchange="switchContent('contentSelect7')">
+            <option value="content34">因材網平台簡介與登入</option>
+            <option value="content35">自主學習與適性診斷</option>
+            <option value="content36">資訊科技領域線上學習資源</option>
+        </select>
+    </div>
+
+    <!-- 主題 1：因材網平台簡介與登入 -->
+    <div id="content34" class="content-box" style="display: block;">
+        <h3>教育部因材網 (Adaptive Learning) 平台簡介</h3>
+        <p>教育部因材網為建置個人化自主學習之適性診斷學習平台，提供學生適性學習路徑，落實因材施教。</p>
+        
+        <div class="responsive-iframe-container">
+            <iframe src="https://www.youtube.com/embed/8e4Ie_OaZ0c" title="因材網介紹" allowfullscreen></iframe>
+        </div>
+
+        <p style="margin-top: 10px;">👉 官方網站入口：<a href="https://adl.edu.tw/" target="_blank">https://adl.edu.tw/</a></p>
+    </div>
+
+    <!-- 主題 2：自主學習與適性診斷 -->
+    <div id="content35" class="content-box">
+        <h3>自主學習四步驟：學、測、討、練</h3>
+        <p>透過因材網的知識結構圖與適性評量，精準定位學習盲點：</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 15px 0;">
+            <div style="background:#f8f9fa; padding:12px; border-radius:6px; border:1px solid #ddd;">
+                <h4 style="color:#0d6efd; margin-bottom:5px;">1. 自主診斷</h4>
+                <p style="font-size:0.9rem;">透過單元診斷測驗，快速掌握尚未熟練的知識節點。</p>
+            </div>
+            <div style="background:#f8f9fa; padding:12px; border-radius:6px; border:1px solid #ddd;">
+                <h4 style="color:#0d6efd; margin-bottom:5px;">2. 觀看教學影片</h4>
+                <p style="font-size:0.9rem;">系統自動依診斷結果派送對應的微課程教學影片。</p>
+            </div>
+            <div style="background:#f8f9fa; padding:12px; border-radius:6px; border:1px solid #ddd;">
+                <h4 style="color:#0d6efd; margin-bottom:5px;">3. 隨堂練習</h4>
+                <p style="font-size:0.9rem;">看完影片後立即進行節點練習題，驗證理解程度。</p>
+            </div>
+            <div style="background:#f8f9fa; padding:12px; border-radius:6px; border:1px solid #ddd;">
+                <h4 style="color:#0d6efd; margin-bottom:5px;">4. 提問與討論</h4>
+                <p style="font-size:0.9rem;">針對不理解的概念在課堂或線上討論區與教師、同儕交流。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主題 3：資訊科技領域線上學習資源 -->
+    <div id="content36" class="content-box">
+        <h3>資訊科技與資料處理科應用資源</h3>
+        <p>本科結合因材網課程模組，提供以下數位學習輔助資源：</p>
+        
+        <ul style="padding-left: 20px; line-height: 1.8; margin-top: 10px;">
+            <li><strong>高中職資訊科技概論：</strong>程式設計基礎、演算法概念、電腦網路與通訊。</li>
+            <li><strong>數位素養與資安議題：</strong>個人資料安全、網路倫理與法律。</li>
+            <li><strong>課後補救與自主進修：</strong>學生可根據個人進度安排課後複習與延伸學習。</li>
+        </ul>
+    </div>
+</div>

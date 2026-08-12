@@ -1,0 +1,42 @@
+<style>
+    .code-block {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        font-family: monospace;
+        margin: 8px 0;
+        overflow-x: auto;
+    }
+</style>
+
+<div class="tab-panel">
+    <h2>技藝競賽</h2>
+
+    <div class="select-container">
+        <label for="contentSelect5"><strong>請選擇練習資源：</strong></label>
+        <select id="contentSelect5" onchange="switchContent('contentSelect5')">
+            <option value="content27">全國高級中等學校技藝競賽資訊平台</option>
+            <option value="content28">DOMjudge術科模擬練習線上平台</option>
+            <option value="content29">自編學科模擬練習試題一</option>
+        </select>
+    </div>
+
+    <div id="content27" class="content-box" style="display: block;">
+        <h3>全國高級中等學校技藝競賽資訊平台</h3>
+        <p>👉 <a href="https://sci-me.k12ea.gov.tw/Contest/HistoryQuestionsList?c_class=2" target="_blank">商業類歷屆考題下載</a></p>
+        <img src="k12contest.png" class="responsive-img" alt="競賽平台">
+    </div>
+
+    <div id="content29" class="content-box">
+        <h3>Python 程式設計學科模擬試題</h3>
+        <p><strong>1. 執行以下 Python 程式片段，其結果為何？</strong></p>
+        <div class="code-block">
+            a, s = 50, 0<br>
+            while a &gt; 0:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;s += a % 5<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;a = a // 3<br>
+            print(s % 4)
+        </div>
+        <p>(A) 0 (B) 1 (C) 2 (D) 3</p>
+    </div>
+</div>
