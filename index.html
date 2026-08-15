@@ -107,17 +107,20 @@
             border-radius: 4px;
         }
 
-        /* 頁籤選單 RWD */
+        /* ===== RWD 頁籤與下拉選單設計 ===== */
+        .tab-nav-wrapper {
+            background-color: #ffffff;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        /* 桌面端頁籤列表 (預設顯示) */
         .tab-header {
             display: flex;
-            background-color: #f1f3f5;
-            border-bottom: 2px solid #e9ecef;
-            overflow-x: auto; /* 手機端可滑動 */
+            overflow-x: auto;
             white-space: nowrap;
             -webkit-overflow-scrolling: touch;
         }
 
-        /* 隱藏滾動條 */
         .tab-header::-webkit-scrollbar {
             display: none;
         }
@@ -154,6 +157,21 @@
             width: 100%;
             height: 3px;
             background-color: #0d6efd;
+        }
+
+        /* 行動端下拉選單 (預設隱藏) */
+        .tab-select-mobile {
+            display: none;
+            width: calc(100% - 24px);
+            margin: 12px auto;
+            padding: 0px 14px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #212529;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            background-color: #ffffff;
+            outline: none;
         }
 
         /* 內容容器與 RWD 通用樣式 */
@@ -249,11 +267,19 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 手機極致優化 */
+        /* ===== RWD 切換斷點：768px 以下改為下拉選單 ===== */
+        @media (max-width: 768px) {
+            .tab-header {
+                display: none; /* 隱藏桌面頁籤 */
+            }
+            .tab-select-mobile {
+                display: block; /* 顯示手機下拉選單 */
+            }
+        }
+
         @media (max-width: 576px) {
             body { padding: 5px; }
             .tab-content-wrapper { padding: 12px; }
-            .tab-btn { padding: 10px 14px; font-size: 14px; }
             .content-box { padding: 12px; }
         }
     </style>
@@ -281,15 +307,29 @@
             </div>
         </div>
 
-        <!-- 上方頁籤 -->
-        <div class="tab-header" role="tablist">
-            <button class="tab-btn active" role="tab" aria-selected="true" data-file="tab-1.html">個人簡歷</button>
-            <button class="tab-btn" role="tab" aria-selected="false" data-file="tab-2.html">授課科目</button>
-            <button class="tab-btn" role="tab" aria-selected="false" data-file="tab-3.html">班級經營</button>
-            <button class="tab-btn" role="tab" aria-selected="false" data-file="tab-4.html">升學進路</button>
-            <button class="tab-btn" role="tab" aria-selected="false" data-file="tab-5.html">技藝競賽</button>
-            <button class="tab-btn" role="tab" aria-selected="false" data-file="tab-6.html">數位素養</button>
-            <button class="tab-btn" role="tab" aria-selected="false" data-file="tab-7.html">＠因材網</button>
+        <!-- 導覽區塊（包含桌面頁籤與行動下拉選單） -->
+        <div class="tab-nav-wrapper">
+            <!-- 手機端：下拉選單 -->
+            <select class="tab-select-mobile" id="mobileTabSelect">
+                <option value="tab-1.html">個人簡歷</option>
+                <option value="tab-2.html">授課科目</option>
+                <option value="tab-3.html">班級經營</option>
+                <option value="tab-4.html">升學進路</option>
+                <option value="tab-5.html">技藝競賽</option>
+                <option value="tab-6.html">數位素養</option>
+                <option value="tab-7.html">＠因材網</option>
+            </select>
+
+            <!-- 桌面端：頁籤選單 -->
+            <div class="tab-header" role="tablist">
+                <button class="tab-btn active" role="tab" aria-selected="true" data-file="tab-1.html">個人簡歷</button>
+                <button class="tab-btn" role="tab" aria-selected="false" data-file="tab-2.html">授課科目</button>
+                <button class="tab-btn" role="tab" aria-selected="false" data-file="tab-3.html">班級經營</button>
+                <button class="tab-btn" role="tab" aria-selected="false" data-file="tab-4.html">升學進路</button>
+                <button class="tab-btn" role="tab" aria-selected="false" data-file="tab-5.html">技藝競賽</button>
+                <button class="tab-btn" role="tab" aria-selected="false" data-file="tab-6.html">數位素養</button>
+                <button class="tab-btn" role="tab" aria-selected="false" data-file="tab-7.html">＠因材網</button>
+            </div>
         </div>
 
         <!-- 動態內容區域 -->
@@ -328,22 +368,43 @@
             }
         }
 
+        // 統一切換處理（同步 Tab 樣式與 Select 選項）
+        function changeTab(file) {
+            // 1. 載入內容
+            loadTabContent(file);
+
+            // 2. 更新桌面端 Tab 樣式
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                const isSelected = btn.getAttribute('data-file') === file;
+                btn.classList.toggle('active', isSelected);
+                btn.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+            });
+
+            // 3. 更新行動端 Select 值
+            const mobileSelect = document.getElementById('mobileTabSelect');
+            if (mobileSelect && mobileSelect.value !== file) {
+                mobileSelect.value = file;
+            }
+        }
+
+        // 監聽桌面端 Tab 點擊
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', function () {
-                document.querySelectorAll('.tab-btn').forEach(b => {
-                    b.classList.remove('active');
-                    b.setAttribute('aria-selected', 'false');
-                });
-                this.classList.add('active');
-                this.setAttribute('aria-selected', 'true');
-
                 const file = this.getAttribute('data-file');
-                loadTabContent(file);
+                changeTab(file);
             });
         });
 
+        // 監聽手機端 Select 選擇變化
+        const mobileSelect = document.getElementById('mobileTabSelect');
+        mobileSelect.addEventListener('change', function () {
+            changeTab(this.value);
+        });
+
+        // 初次載入預設頁面
         loadTabContent('tab-1.html');
 
+        /* 輪播邏輯 */
         let currentSlide = 0;
         const slides = document.querySelectorAll('.carousel-slide');
         const dots = document.querySelectorAll('.dot');
