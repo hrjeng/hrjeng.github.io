@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    /* 1. 外層可視區域容器 */
+    .iframe-crop-container {
+      width: 800px;        /* 顯示區域的寬度 (請依最新消息區塊大小調整) */
+      height: 500px;       /* 顯示區域的高度 */
+      overflow: hidden;    /* 隱藏超出範圍的網頁內容 */
+      position: relative;  /* 作為子元素定位基準 */
+      border: 1px solid #ccc;
+    }
+
+    /* 2. 內部 iframe */
+    .iframe-crop-container iframe {
+      position: absolute;
+      width: 1200px;       /* 原始網頁的預計寬度 */
+      height: 1500px;      /* 原始網頁的預計高度 */
+      
+      /* 透過負邊距將最新消息區域拉至左上角 (數字需依現場畫面微調) */
+      top: -250px;         /* 向上位移，裁切掉頂部 Header / Banner */
+      left: -200px;        /* 向左位移，裁切掉左側選單 */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="iframe-crop-container">
+    <iframe 
+      src="https://www.sphs.hc.edu.tw/ischool/publish_page/524/" 
+      frameborder="0" 
+      scrolling="no">
+    </iframe>
+  </div>
+
+</body>
+</html>
