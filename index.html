@@ -50,16 +50,16 @@
             z-index: 1;
         }
 
-        .carousel-slide.active {
-            opacity: 1;
-            z-index: 2;
-        }
+            .carousel-slide.active {
+                opacity: 1;
+                z-index: 2;
+            }
 
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+            .carousel-slide img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
 
         .carousel-prev, .carousel-next {
             position: absolute;
@@ -76,12 +76,17 @@
             transition: background 0.3s;
         }
 
-        .carousel-prev:hover, .carousel-next:hover {
-            background: rgba(0, 0, 0, 0.8);
+            .carousel-prev:hover, .carousel-next:hover {
+                background: rgba(0, 0, 0, 0.8);
+            }
+
+        .carousel-prev {
+            left: 10px;
         }
 
-        .carousel-prev { left: 10px; }
-        .carousel-next { right: 10px; }
+        .carousel-next {
+            right: 10px;
+        }
 
         .carousel-dots {
             position: absolute;
@@ -102,11 +107,11 @@
             transition: all 0.3s;
         }
 
-        .dot.active {
-            background: #ffffff;
-            width: 20px;
-            border-radius: 4px;
-        }
+            .dot.active {
+                background: #ffffff;
+                width: 20px;
+                border-radius: 4px;
+            }
 
         /* ===== RWD 頁籤與下拉選單設計 ===== */
         .tab-nav-wrapper {
@@ -122,9 +127,9 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        .tab-header::-webkit-scrollbar {
-            display: none;
-        }
+            .tab-header::-webkit-scrollbar {
+                display: none;
+            }
 
         .tab-btn {
             flex: 1 0 auto;
@@ -140,25 +145,26 @@
             text-align: center;
         }
 
-        .tab-btn:hover {
-            color: #212529;
-            background-color: #e9ecef;
-        }
+            .tab-btn:hover {
+                /*    color: #212529;  */
+                color: #ab0606;
+                background-color: #e9ecef;
+            }
 
-        .tab-btn.active {
-            color: #0d6efd;
-            background-color: #ffffff;
-        }
+            .tab-btn.active {
+                color: #0d6efd;
+                background-color: #ffffff;
+            }
 
-        .tab-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background-color: #0d6efd;
-        }
+                .tab-btn.active::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -2px;
+                    left: 0;
+                    width: 100%;
+                    height: 3px;
+                    background-color: #0d6efd;
+                }
 
         /* 行動端下拉選單 (預設隱藏) */
         .tab-select-mobile {
@@ -186,16 +192,16 @@
             animation: fadeIn 0.3s ease;
         }
 
-        .tab-panel h2 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: #a50000;
-        }
+            .tab-panel h2 {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+                color: #a50000;
+            }
 
-        .tab-panel h3 {
-            font-size: 1.1rem;
-            margin: 10px 0;
-        }
+            .tab-panel h3 {
+                font-size: 1.1rem;
+                margin: 10px 0;
+            }
 
         .select-container {
             margin: 15px 0;
@@ -245,14 +251,14 @@
             background: #f0f0f0;
         }
 
-        .responsive-iframe-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
+            .responsive-iframe-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: 0;
+            }
 
         .bottom {
             text-align: center;
@@ -264,8 +270,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* ===== RWD 切換斷點：768px 以下改為下拉選單 ===== */
@@ -273,17 +286,25 @@
             .tab-header {
                 display: none; /* 隱藏桌面頁籤 */
             }
+
             .tab-select-mobile {
                 display: block; /* 顯示手機下拉選單 */
             }
         }
 
         @media (max-width: 576px) {
-            body { padding: 5px; }
-            .tab-content-wrapper { padding: 12px; }
-            .content-box { padding: 12px; }
-        }
+            body {
+                padding: 5px;
+            }
 
+            .tab-content-wrapper {
+                padding: 12px;
+            }
+
+            .content-box {
+                padding: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -356,95 +377,95 @@
     </div>
 
     <script>
-        function switchContent(selectId) {
-            const select = document.getElementById(selectId);
-            if (!select) return;
-            const targetId = select.value;
-            const parent = select.closest('.tab-panel');
-            const boxes = parent.querySelectorAll('.content-box');
+                function switchContent(selectId) {
+                    const select = document.getElementById(selectId);
+                    if (!select) return;
+                    const targetId = select.value;
+                    const parent = select.closest('.tab-panel');
+                    const boxes = parent.querySelectorAll('.content-box');
 
-            boxes.forEach(box => box.style.display = 'none');
-            const targetBox = document.getElementById(targetId);
-            if (targetBox) targetBox.style.display = 'block';
-        }
+                    boxes.forEach(box => box.style.display = 'none');
+                    const targetBox = document.getElementById(targetId);
+                    if (targetBox) targetBox.style.display = 'block';
+                }
 
-        async function loadTabContent(fileName) {
-            const wrapper = document.getElementById('main-content');
-            try {
-                const response = await fetch(fileName);
-                if (!response.ok) throw new Error('網絡響應不正常');
-                const html = await response.text();
-                wrapper.innerHTML = html;
-            } catch (error) {
-                wrapper.innerHTML = `<p style="color:red; text-align:center;">載入頁面失敗: ${error.message}</p>`;
-            }
-        }
+                async function loadTabContent(fileName) {
+                    const wrapper = document.getElementById('main-content');
+                    try {
+                        const response = await fetch(fileName);
+                        if (!response.ok) throw new Error('網絡響應不正常');
+                        const html = await response.text();
+                        wrapper.innerHTML = html;
+                    } catch (error) {
+                        wrapper.innerHTML = `<p style="color:red; text-align:center;">載入頁面失敗: ${error.message}</p>`;
+                    }
+                }
 
-        // 統一切換處理（同步 Tab 樣式與 Select 選項）
-        function changeTab(file) {
-            // 1. 載入內容
-            loadTabContent(file);
+                // 統一切換處理（同步 Tab 樣式與 Select 選項）
+                function changeTab(file) {
+                    // 1. 載入內容
+                    loadTabContent(file);
 
-            // 2. 更新桌面端 Tab 樣式
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                const isSelected = btn.getAttribute('data-file') === file;
-                btn.classList.toggle('active', isSelected);
-                btn.setAttribute('aria-selected', isSelected ? 'true' : 'false');
-            });
+                    // 2. 更新桌面端 Tab 樣式
+                    document.querySelectorAll('.tab-btn').forEach(btn => {
+                        const isSelected = btn.getAttribute('data-file') === file;
+                        btn.classList.toggle('active', isSelected);
+                        btn.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+                    });
 
-            // 3. 更新行動端 Select 值
-            const mobileSelect = document.getElementById('mobileTabSelect');
-            if (mobileSelect && mobileSelect.value !== file) {
-                mobileSelect.value = file;
-            }
-        }
+                    // 3. 更新行動端 Select 值
+                    const mobileSelect = document.getElementById('mobileTabSelect');
+                    if (mobileSelect && mobileSelect.value !== file) {
+                        mobileSelect.value = file;
+                    }
+                }
 
-        // 監聽桌面端 Tab 點擊
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', function () {
-                const file = this.getAttribute('data-file');
-                changeTab(file);
-            });
-        });
+                // 監聽桌面端 Tab 點擊
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const file = this.getAttribute('data-file');
+                        changeTab(file);
+                    });
+                });
 
-        // 監聽手機端 Select 選擇變化
-        const mobileSelect = document.getElementById('mobileTabSelect');
-        mobileSelect.addEventListener('change', function () {
-            changeTab(this.value);
-        });
+                // 監聽手機端 Select 選擇變化
+                const mobileSelect = document.getElementById('mobileTabSelect');
+                mobileSelect.addEventListener('change', function () {
+                    changeTab(this.value);
+                });
 
-        // 初次載入預設頁面
-        loadTabContent('tab-1.html');
+                // 初次載入預設頁面
+                loadTabContent('tab-1.html');
 
-        /* 輪播邏輯 */
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.carousel-slide');
-        const dots = document.querySelectorAll('.dot');
-        let slideInterval = setInterval(nextSlide, 5000);
+                /* 輪播邏輯 */
+                let currentSlide = 0;
+                const slides = document.querySelectorAll('.carousel-slide');
+                const dots = document.querySelectorAll('.dot');
+                let slideInterval = setInterval(nextSlide, 5000);
 
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === index);
-                dots[i].classList.toggle('active', i === index);
-            });
-            currentSlide = index;
-        }
+                function showSlide(index) {
+                    slides.forEach((slide, i) => {
+                        slide.classList.toggle('active', i === index);
+                        dots[i].classList.toggle('active', i === index);
+                    });
+                    currentSlide = index;
+                }
 
-        function nextSlide() {
-            let index = (currentSlide + 1) % slides.length;
-            showSlide(index);
-        }
+                function nextSlide() {
+                    let index = (currentSlide + 1) % slides.length;
+                    showSlide(index);
+                }
 
-        function prevSlide() {
-            let index = (currentSlide - 1 + slides.length) % slides.length;
-            showSlide(index);
-        }
+                function prevSlide() {
+                    let index = (currentSlide - 1 + slides.length) % slides.length;
+                    showSlide(index);
+                }
 
-        function goToSlide(index) {
-            showSlide(index);
-            clearInterval(slideInterval);
-            slideInterval = setInterval(nextSlide, 5000);
-        }
+                function goToSlide(index) {
+                    showSlide(index);
+                    clearInterval(slideInterval);
+                    slideInterval = setInterval(nextSlide, 5000);
+                }
     </script>
 </body>
 </html>
